@@ -1,0 +1,25 @@
+import @Definitions
+
+// Proof that true is true
+TrueIsTrue : Type
+  true == true
+
+// If `b` is `a` and `a` is `true`, then surely `b` is `true`
+Patrik : Type
+  {a : Bool, b : Bool, b_is_a : b == a, a_is_true : a == true} -> b == true
+
+// Swaps the elemens of an And
+Swap : Type
+  {~A : Type, ~B : Type, vals : And(A, B)} -> And(B, A)
+
+// Given a Bool `a`, returns a different Bool `b` 
+OtherBool : Type
+  {a : Bool} -> [b : Bool ~ Not(a == b)]
+
+// Given a non-empty list A, returns one of is elements
+Sample : Type
+  {~A : Type, xs : List(A), non_empty : NonEmpty(xs)} -> A
+
+// Return the predecessor of a number
+GetPred : Type
+  {x : Nat, not_0 : Positive(x)} -> [y : Nat ~ IsPred(y, x)]

@@ -1,0 +1,94 @@
+// :::::::::::::::
+// :: Datatypes ::
+// :::::::::::::::
+
+// The Empty type, with no constructors
+T Empty
+
+// The Unit type, with one constructor
+T Unit
+| unit
+
+// The Bool type, with two constructors
+T Bool
+| true
+| false
+
+// The Or(A, B) type can have either A or B
+T Or {A : Type, B : Type}
+| left  {val : A}
+| right {val : B}
+
+// The And(A, B) type must have both A and B
+T And {A : Type, B : Type}
+| both {a : A, b : B}
+
+// The Maybe(A) type may have A
+T Maybe {A : Type}
+| just {val : A}
+| none
+
+// The Nat type can be zero or a the sucessor of another Nat
+T Nat
+| succ {pred : Nat}
+| zero
+
+// The List(A) type can be empty, or an A appended to a List(A)
+T List {A : Type}
+| cons {head : A, tail : List(A)}
+| nil
+
+// :::::::::::::::
+// :::::::::::::::
+
+// The Bool `b` is false
+T IsTrue (b : Bool)
+| it_is  (true)
+
+// The Bool `b` is true
+T IsTrue (b : Bool)
+| it_is  (true)
+
+// The Nat `a` is larger than 0
+T Positive (a : Nat)
+| positive {a : Nat} (succ(a))
+
+// The Nat `a` is the predecessor of the Nat `b`
+T IsPred (a : Nat, b : Nat)
+| is_pred {pred : Nat} (pred, succ(pred))
+
+// The List(A) `xs` is not empty
+T NonEmpty {A : Type} (xs : List(A))
+| non_empty {x : A, xs : List(A)} (cons(~A, x, xs))
+
+// Element `elem` is at index `n` of list `xs`
+T At {A : Type, elem : A} (n : Nat, xs : List(A))
+| here  {list : List(A)} (zero, cons(~A, elem, list))
+| there {head : A, tail : List(A), n : Nat, at : At(A, elem, n, tail)} (succ(n), cons(~A, head, tail))
+
+// :::::::::::::::
+// :: Functions ::
+// :::::::::::::::
+
+// A type that can't be constructed is the same as a false theorem
+Not : {A : Type} -> Type
+  A -> Empty
+
+// A boolean negation function
+not : {x : Bool} -> Bool
+  case/Bool x
+  | true  => false
+  | false => true
+  : Bool
+
+// If-then-else with Bool
+iff : {x : Bool, ~A : Type, case_true : A, case_false : A} -> A
+  case/Bool x
+  | true  => case_true
+  | false => case_false
+  : A
+
+// From falsehood, everything follows
+absurd : {e : Empty, ~P : Type} -> P
+  case/Empty e
+  : P

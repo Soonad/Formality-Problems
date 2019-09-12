@@ -1,0 +1,18 @@
+// Author: Victor Maia (0x125a2be7b0997bA39AC5839A2bCeE5d0521E9453)
+
+import @Problems
+
+zero_not_positive : {x : Positive(zero)} -> Empty
+  case/Positive x
+  | positive => unit
+  : case/Nat a
+    | succ => Unit
+    | zero => Empty
+    : Type
+
+get_pred : {case x : Nat, not_0 : Positive(x)} -> [y : Nat ~ IsPred(y, x)]
+| succ => [x.pred ~ is_pred(x.pred)]
+| zero => absurd(zero_not_positive(not_0), ~[y : Nat ~ IsPred(y, zero)])
+
+main : GetPred
+  get_pred

@@ -1,6 +1,0 @@
-import Problems
-
-A0 : P0 {~A, ~B, f, x}
-  f(x)
-
-// Write here!
