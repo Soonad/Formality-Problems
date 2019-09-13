@@ -18,8 +18,28 @@ OtherBool : Type
 
 // Given a non-empty list A, returns one of is elements
 Sample : Type
-  {~A : Type, xs : List(A), non_empty : NonEmpty(xs)} -> A
+  {~A : Type, xs : List(A), non_empty : NonEmpty(A, xs)} -> A
 
 // Return the predecessor of a number
 GetPred : Type
   {x : Nat, not_0 : Positive(x)} -> [y : Nat ~ IsPred(y, x)]
+
+// The element at index `1` of `[1,7,0]` is `7`
+SevenAt1 : Type
+  let vec =
+    vcons(~Word, ~*2, 1,
+    vcons(~Word, ~*1, 7,
+    vcons(~Word, ~*0, 0,
+    vnil(~Word))))
+  let idx =
+    fsucc(~*2,
+    fzero(~*1))
+  At(Word, 7, *3, idx, vec)
+
+// Allocates a Vec with given length
+Alloc : Type
+  {len : Ind, ~A : Type, x : !A} -> !Vec(A, len)
+
+// Get the element at given position in a Vec
+GetAt : Type
+  {len : Ind} -> !{~A : Type, idx : Fin(len), vec : Vec(A, len)} -> [x : A ~ At(A, x, len, idx, vec)]

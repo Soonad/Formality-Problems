@@ -61,10 +61,29 @@ T IsPred (a : Nat, b : Nat)
 T NonEmpty {A : Type} (xs : List(A))
 | non_empty {x : A, xs : List(A)} (cons(~A, x, xs))
 
-// Element `elem` is at index `n` of list `xs`
-T At {A : Type, elem : A} (n : Nat, xs : List(A))
-| here  {list : List(A)} (zero, cons(~A, elem, list))
-| there {head : A, tail : List(A), n : Nat, at : At(A, elem, n, tail)} (succ(n), cons(~A, head, tail))
+// A Fin is a Nat with a known max. value
+T Fin (len : Ind)
+| fsucc {~i : Ind, pred : Fin(i)} (step(i))
+| fzero {~i : Ind} (step(i))
+
+// A Vec is a list with a known length
+T Vec {A : Type} (len : Ind)
+| vcons {~len : Ind, x : A, xs : Vec(A, len)} (step(len))
+| vnil (base)
+
+// Element `elem` is at index `n` of vector `xs`
+T At {A : Type, elem : A} (len : Ind, idx : Fin(len), xs : Vec(A, len))
+| here
+  { len : Ind
+  , vec : Vec(A, len)
+  } (step(len), fzero(~len), vcons(~A, ~len, elem, vec))
+| there
+  { skip : A
+  , len  : Ind
+  , idx  : Fin(len)
+  , vec  : Vec(A, len)
+  , at   : At(A, elem, len, idx, vec)
+  } (step(len), fsucc(~len, idx), vcons(~A, ~len, skip, vec))
 
 // :::::::::::::::
 // :: Functions ::
@@ -92,3 +111,51 @@ iff : {x : Bool, ~A : Type, case_true : A, case_false : A} -> A
 absurd : {e : Empty, ~P : Type} -> P
   case/Empty e
   : P
+
+// :::::::::::::::
+// :: Induction ::
+// :::::::::::::::
+
+// The inductive hypothesis on nats. Erases to Church.
+Ind : Type
+  $ self
+  {~P     : {r : Ind} -> Type} ->
+  {step   : ! {~r : Ind, i : P(r)} -> P(step(r))} ->
+  ! {base : P(base)} ->
+    P(self)
+
+step : {r : Ind} -> Ind
+  new(~Ind){~P, step}
+  dup step = step
+  dup func = (%r)(~P, #step)
+  # {base}
+    step(~r, func(base))
+
+base : Ind
+  new(~Ind){~P, step}
+  dup step = step
+  # {base}
+    base
+
+// Doubles the number of steps of an `ind`.
+twice : {n : Ind} -> Ind
+  new(~Ind) {~P, STEP}
+  dup STEP = STEP
+  let moti = {n} P(twice(n))
+  let STEP = {~n, i} => STEP(~step(twice(n)), STEP(~twice(n), i))
+  dup loop = (%n)(~moti, #STEP)
+  # {base} loop(base)
+
+// Since `Ind` is just the type of the inductive hypothesis wrapped on self,
+// then induction on `Ind` is just identity.
+ind :
+  {n     : Ind
+  , ~P   : {n : Ind} -> Type
+  , step : ! {~n : Ind, i : P(n)} -> P(step(n))
+  , stop : ! P(base)
+  } -> ! P(n)
+  dup step = step
+  dup stop = stop
+  dup loop = (%n)(~P, #step)
+  # loop(stop)
+
