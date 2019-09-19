@@ -1,24 +1,55 @@
 import @Definitions
 
+// :::::::::::::::::::::::::::
+// :: Booleans and Equality ::
+// :::::::::::::::::::::::::::
+
 // Proof that true is true
 TrueIsTrue : Type
   true == true
+
+// Proof that `b` is equal to itself
+AIsA : {a : Bool} -> a == a
+
+// Double negation is identity
+AIsNotNotA : Type
+  {a : Bool} -> not(not(a)) == a
+
+// Either `a` is `true` or `a` is `false`
+BoolsAreTrueOrFalse : Type
+  {a : Bool} -> Or(a == true, a == false)
+
+// Either `a` is true or `b` is false
+AIsTrueOrBIsFalse : Type
+  {a : Bool, b : Bool, e : a == b} -> Or(a == true, b == false)
+
+// Not every bool is true
+NotEveryBoolIsTrue 
+  Not({a : Bool} -> a == true)
+
+// Not every pair of bool is identical
+NotEveryPairOfBoolIsEqual
+  Not({a : Bool, b : Bool} -> a == b)
 
 // If `b` is `a` and `a` is `true`, then surely `b` is `true`
 Patrik : Type
   {a : Bool, b : Bool, b_is_a : b == a, a_is_true : a == true} -> b == true
 
-// Swaps the elemens of an And
-Swap : Type
-  {~A : Type, ~B : Type, vals : And(A, B)} -> And(B, A)
-
 // Given a Bool `a`, returns a different Bool `b` 
 OtherBool : Type
   {a : Bool} -> [b : Bool ~ Not(a == b)]
 
+// ::::::::::::::::
+// :: Structures ::
+// ::::::::::::::::
+
+// Swaps the elemens of an And
+Swap : Type
+  {~A : Type, ~B : Type, vals : And(A, B)} -> And(B, A)
+
 // Given a non-empty list A, returns one of is elements
 Sample : Type
-  {~A : Type, xs : List(A), non_empty : NonEmpty(A, xs)} -> A
+  {~A : Type, xs : List(A), ~non_empty : NonEmpty(A, xs)} -> A
 
 // Return the predecessor of a number
 GetPred : Type
