@@ -1,14 +1,5 @@
 import @Problems
 
-// ::::::::::::::::::::::
-// :: Solving Problems ::
-// ::::::::::::::::::::::
-
-// All problems are commented out there, following the same structure of the @Problems file
-// Also, they are already referenced on the main term down there
-// To solve a problem just start by uncommenting the lines on the main term (on the type and the
-// term itself) and then proceed by filling in the holes.
-
 // :::::::::::::::::::::::::::
 // :: Booleans and Equality ::
 // :::::::::::::::::::::::::::
