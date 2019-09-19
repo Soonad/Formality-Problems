@@ -158,4 +158,3 @@ ind :
   dup stop = stop
   dup loop = (%n)(~P, #step)
   # loop(stop)
-

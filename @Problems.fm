@@ -9,7 +9,8 @@ TrueIsTrue : Type
   true == true
 
 // Proof that `b` is equal to itself
-AIsA : {a : Bool} -> a == a
+AIsA : Type
+  {a : Bool} -> a == a
 
 // Double negation is identity
 AIsNotNotA : Type
