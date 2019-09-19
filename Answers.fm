@@ -1,0 +1,127 @@
+import @Problems
+
+// :::::::::::::::::::::::::::
+// :: Booleans and Equality ::
+// :::::::::::::::::::::::::::
+
+// TrueIsTrue
+true_is_true : TrueIsTrue
+  ?
+
+// AIsA
+a_is_a : AIsA
+  ?
+
+// AIsNotNotA
+a_is_not_not_a : AIsNotNotA
+  ?
+
+// BoolsAreTrueOrFalse
+bools_are_true_or_false : BoolsAreTrueOrFalse
+  ?
+
+// AIsTrueOrBiIsFalse
+a_is_true_or_b_is_false : AIsTrueOrBIsFalse
+  ?
+
+// NotEveryBoolIsTrue
+not_every_bool_is_true : NotEveryBoolIsTrue
+  ?
+
+// NotEveryPairOfBoolIsEqual
+not_every_pair_of_bool_is_equal : NotEveryPairOfBoolIsEqual
+  ?
+
+// Patrik
+patrik : Patrik
+  ?
+
+// OtherBool
+other_bool : OtherBool
+  ?
+
+// ::::::::::::::::
+// :: Structures ::
+// ::::::::::::::::
+
+// Swap
+swap : Swap
+  ?
+
+// Sample
+sample : Sample
+  ?
+
+// GetPred
+get_pred : GetPred
+  ?
+
+// SevenAt1
+seven_at_1 : SevenAt1
+  ?
+
+// Alloc
+alloc : Alloc
+  ?
+
+// GetAt
+get_at : GetAt
+  ?
+
+// ::::::::::
+// :: Main ::
+// ::::::::::
+
+// We have a unit in the beginning and the end to avoid having to change characters when adding or
+// changing problems.
+
+// All problems are commented out by default
+
+main :
+  [ :Unit // Placeholder
+
+  // Booleans and Equality
+  // , :TrueIsTrue
+  // , :AIsA
+  // , :AIsNotNotA
+  // , :BoolsAreTrueOrFalse
+  // , :AIsTrueOrBIsFalse
+  // , :NotEveryBoolIsTrue
+  // , :NotEveryPairOfBoolIsEqual
+  // , :Patrik
+  // , :OtherBool
+
+  // Structures
+  // , :Swap
+  // , :Sample
+  // , :GetPred
+  // , :SevenAt1
+  // , :Alloc
+  // , :GetAt
+
+  , Unit // Placeholder
+  ]
+
+  [ unit // Placeholder
+
+  // Booleans and Equality
+  // , true_is_true
+  // , a_is_a
+  // , a_is_not_not_a
+  // , bools_are_true_or_false
+  // , a_is_true_or_b_is_false
+  // , not_every_bool_is_true
+  // , not_every_pair_of_bool_is_equal
+  // , patrik
+  // , other_bool
+
+  // Structures
+  // , swap
+  // , sample
+  // , get_pred
+  // , seven_at_1
+  // , alloc
+  // , get_at
+
+  , unit // Placeholder
+  ]
