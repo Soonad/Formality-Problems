@@ -32,12 +32,14 @@ There are 3 reasons for that:
 1. Add required definitions to `@Definitions.fm` (support types and functions)
 2. Add a type defining the problem to `@Problems.fm`
 3. Change the default `Answers.fm` to:
-  - Create a default implementation with hole, like:
-  ```
-  // ProblemName
-  problem_name : ProblemName
-    ?
-  ```
-  - Add a line to the type of the main with `, :ProblemName`
-  - Add a line to the body of the main with `, problem_name`
-  - Try to keep the same order position as within the `@Problems.fm`
+    - Create a default solution placeholder with hole and type annotation (as shown below)
+    - Add a line to the type of the main with `, :ProblemName`
+    - Add a line to the body of the main with `, problem_name`
+    - Try to keep the same order position as within the `@Problems.fm`
+
+Example default problem solution placeholder
+```
+// ProblemName
+problem_name : ProblemName
+  ?
+```
