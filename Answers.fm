@@ -13,7 +13,7 @@ a_is_a : AIsA
   ?
 
 // AIsNotNotA
-a_is_not_a : AIsNotA
+a_is_not_not_a : AIsNotNotA
   ?
 
 // BoolsAreTrueOrFalse
@@ -83,7 +83,7 @@ main :
   // Booleans and Equality
   // , :TrueIsTrue
   // , :AIsA
-  // , :AIsNotA
+  // , :AIsNotNotA
   // , :BoolsAreTrueOrFalse
   // , :AIsTrueOrBIsFalse
   // , :NotEveryBoolIsTrue
@@ -107,7 +107,7 @@ main :
   // Booleans and Equality
   // , true_is_true
   // , a_is_a
-  // , a_is_not_a
+  // , a_is_not_not_a
   // , bools_are_true_or_false
   // , a_is_true_or_b_is_false
   // , not_every_bool_is_true
